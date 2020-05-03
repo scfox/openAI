@@ -85,8 +85,8 @@ Resources:
               #!/bin/bash
               yum -y install git
               cd /home/ec2-user
-              su ec2-user -c 'git clone https://github.com/scfox/keras_tuner_aws.git'
-              su ec2-user -c 'cd keras_tuner_aws; ./tune_master.sh ${OutputPath} ${MaxEpochs};'
+              su ec2-user -c 'git clone https://github.com/scfox/openAI.git'
+              su ec2-user -c 'cd openAI; ./tune_master.sh ${OutputPath} ${MaxEpochs};'
             - OutputPath: !Ref OutputPath
               MaxEpochs: !Ref MaxEpochs
 Outputs:
