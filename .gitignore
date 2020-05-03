@@ -114,4 +114,4 @@ lambda_pkgs/
 .idea/
 
 logs/
-model/trained
+output/
