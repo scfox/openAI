@@ -1,0 +1,9 @@
+$ python -m venv projectname
+$ source projectname/bin/activate
+(venv) $ pip install ipykernel
+(venv) $ ipython kernel install --user --name=projectname
+
+
+https://towardsdatascience.com/how-to-use-pipenv-with-jupyter-and-vscode-ae0e970df486
+pipenv install jupyter
+pipenv run jupyter notebook
