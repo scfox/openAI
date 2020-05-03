@@ -33,7 +33,7 @@ print(f"obs: {obs}")
 
 # Hyperparamters
 env_name = "CartPole-v1" # @param {type:"string"}
-num_iterations = args.max_epochs # @param {type:"integer"}
+num_iterations = int(args.max_epochs) # @param {type:"integer"}
 collect_episodes_per_iteration = 2 # @param {type:"integer"}
 replay_buffer_capacity = 2000 # @param {type:"integer"}
 
