@@ -17,14 +17,15 @@ from tf_agents.policies import policy_saver
 
 def _parse_args():
     parser = argparse.ArgumentParser()
+    parser.add_argument('--input_path', type=str, default='../output/policy')
     parser.add_argument('--output_path', type=str, default='../output')
-    parser.add_argument('--input_path', type=str, default='model/input')
     parser.add_argument('--max_epochs', type=str, default=1)
     return parser.parse_known_args()
 
 
 print("Tuning model......")
 args, unknown = _parse_args()
+print(f"input_path: {args.input_path}")
 print(f"output_path: {args.output_path}")
 print(f"max_epochs: {args.max_epochs}")
 env = gym.make('CartPole-v1')
@@ -68,8 +69,15 @@ tf_agent = reinforce_agent.ReinforceAgent(
     train_step_counter=train_step_counter)
 tf_agent.initialize()
 
-eval_policy = tf_agent.policy
 collect_policy = tf_agent.collect_policy
+if args.input_path == 'None':
+    # training from scratch
+    print(f"Starting training from beginning.")
+    eval_policy = tf_agent.policy
+else:
+    # continuing training from a saved policy
+    print(f"Continuing training on policy: {args.input_path}")
+    eval_policy = tf.compat.v2.saved_model.load(args.input_path)
 
 
 def compute_avg_return(environment, policy, num_episodes=10):

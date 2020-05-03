@@ -6,6 +6,10 @@ Parameters:
     Type: String
     Description: Master instance type
     Default: t3.large
+  InputPath:
+    Type: String
+    Description: s3 path for existing policy to continue training
+    Default: None
   OutputPath:
     Type: String
     Description: s3 path to place output
@@ -86,8 +90,9 @@ Resources:
               yum -y install git
               cd /home/ec2-user
               su ec2-user -c 'git clone https://github.com/scfox/openAI.git'
-              su ec2-user -c 'cd openAI; ./tune_master.sh ${OutputPath} ${MaxEpochs};'
-            - OutputPath: !Ref OutputPath
+              su ec2-user -c 'cd openAI; ./tune_master.sh ${InputPath} ${OutputPath} ${MaxEpochs};'
+            - InputPath: !Ref InputPath
+              OutputPath: !Ref OutputPath
               MaxEpochs: !Ref MaxEpochs
 Outputs:
   URL:
